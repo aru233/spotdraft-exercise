@@ -71,3 +71,13 @@ class PlanetFavoriteSerializer(serializers.ModelSerializer):
         """Options for the Planet Favorite Serializer."""
         model = PlanetFavorite
         fields = ('name', 'external_id')
+
+
+class MovieFavoriteSerializer(serializers.ModelSerializer):
+    """Serializer for the Movie Favorite Resource."""
+    external_id = serializers.IntegerField(write_only=True)
+
+    class Meta:
+        """Options for the Planet Favorite Serializer."""
+        model = MovieFavorite
+        fields = ('title', 'external_id')

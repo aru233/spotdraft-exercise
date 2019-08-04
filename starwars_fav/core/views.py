@@ -1,11 +1,13 @@
 """Define the views of the starwars fav core app."""
 from rest_framework.generics import GenericAPIView, ListCreateAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from starwars_fav.core.serializers import (
     PaginatedMovieSerializer,
     PaginatedPlanetSerializer,
     PlanetFavoriteSerializer,
+    MovieFavoriteSerializer
 )
 from starwars_fav.core.models import PlanetFavorite, MovieFavorite
 from starwars_fav.core.services import SwapiService
@@ -30,7 +32,6 @@ class PlanetListView(GenericAPIView):
 
 class MovieListView(GenericAPIView):
     """View for listing the movies from the SWAPI."""
-
     serializer_class = PaginatedMovieSerializer
 
     def get(self, request):
@@ -50,3 +51,12 @@ class PlanetFavoriteListCreateView(ListCreateAPIView):
 
     serializer_class = PlanetFavoriteSerializer
     queryset = PlanetFavorite.objects.order_by('name')
+    pagination_class = PageNumberPagination
+
+
+class MovieFavoriteListCreateView(ListCreateAPIView):
+    """View for listing and creating Movie Favorites."""
+
+    serializer_class = MovieFavoriteSerializer
+    queryset = MovieFavorite.objects.order_by('title')
+    pagination_class = PageNumberPagination
