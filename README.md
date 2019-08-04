@@ -10,6 +10,10 @@ A simple favorites app that lets us view/favorite Star Wars data. The data is lo
 
 The API will now be available http://localhost:8000/api
 
+## Testing the app
+
+Run the test cases with the command `python manage.py test`
+
 ## Endpoints
 
 The following Endpoints are available in the API.
