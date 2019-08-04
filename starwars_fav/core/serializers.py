@@ -1,9 +1,9 @@
 """Define the serializers of the starwars fav core app."""
-import re
 from django.urls import reverse
 from rest_framework import serializers
 
 from starwars_fav.core.utils import get_id_from_url
+from starwars_fav.core.models import PlanetFavorite, MovieFavorite
 
 
 class PaginatedSerializer(serializers.Serializer):
@@ -61,3 +61,13 @@ class PaginatedMovieSerializer(PaginatedSerializer):
     """Custom Pagination Serializer as we are rendering directly from SWAPI."""
     results = MovieSerializer(many=True)
     route_name = 'list-movies'
+
+
+class PlanetFavoriteSerializer(serializers.ModelSerializer):
+    """Serializer for the Planet Favorite Resource."""
+    external_id = serializers.IntegerField(write_only=True)
+
+    class Meta:
+        """Options for the Planet Favorite Serializer."""
+        model = PlanetFavorite
+        fields = ('name', 'external_id')
