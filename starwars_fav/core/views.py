@@ -49,4 +49,4 @@ class PlanetFavoriteListCreateView(ListCreateAPIView):
     """View for listing and creating Planet Favorites."""
 
     serializer_class = PlanetFavoriteSerializer
-    queryset = PlanetFavorite.objects.all()
+    queryset = PlanetFavorite.objects.order_by('name')
