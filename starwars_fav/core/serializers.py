@@ -1,6 +1,9 @@
 """Define the serializers of the starwars fav core app."""
+import re
 from django.urls import reverse
 from rest_framework import serializers
+
+from starwars_fav.core.utils import get_id_from_url
 
 
 class PaginatedSerializer(serializers.Serializer):
@@ -30,7 +33,12 @@ class PaginatedSerializer(serializers.Serializer):
 
 class PlanetSerializer(serializers.Serializer):
     """Serializer for the Planet Resource."""
+    id = serializers.SerializerMethodField()
     name = serializers.CharField(max_length=500)
+
+    def get_id(self, obj):
+        """Get the ID from the SWAPI URL, needed for saving favorites."""
+        return get_id_from_url(obj.get('url'))
 
 
 class PaginatedPlanetSerializer(PaginatedSerializer):
@@ -41,7 +49,12 @@ class PaginatedPlanetSerializer(PaginatedSerializer):
 
 class MovieSerializer(serializers.Serializer):
     """Serializer for the Movie Resource."""
+    id = serializers.SerializerMethodField()
     title = serializers.CharField(max_length=500)
+
+    def get_id(self, obj):
+        """Get the ID from the SWAPI URL"""
+        return get_id_from_url(obj.get('url'))
 
 
 class PaginatedMovieSerializer(PaginatedSerializer):
