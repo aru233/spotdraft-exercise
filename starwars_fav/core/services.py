@@ -18,18 +18,20 @@ class SwapiService:
         response.raise_for_status()
         return response.json()
 
-    def get_planets(self, page=1):
+    def get_planets(self, page=1, search=None):
         """Get the list of planets from the SWAPI."""
         params = {
-            'page': page
+            'page': page,
+            'search': search
         }
         response = self.make_request('planets/', 'GET', params=params)
         return response
 
-    def get_movies(self, page=1):
+    def get_movies(self, page=1, search=None):
         """Get the list of movies from the SWAPI."""
         params = {
-            'page': page
+            'page': page,
+            'search': search
         }
         response = self.make_request('films/', 'GET', params=params)
         return response

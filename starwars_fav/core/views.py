@@ -23,7 +23,8 @@ class PlanetListView(GenericAPIView):
 
         # Call the service to get the result
         service = SwapiService()
-        result = service.get_planets(page=request.query_params.get('page', 1))
+        result = service.get_planets(
+            page=request.query_params.get('page', 1), search=request.query_params.get('search'))
 
         # Call the serializer and return the response
         serializer = self.get_serializer(result)
@@ -39,7 +40,8 @@ class MovieListView(GenericAPIView):
 
         # Call the service to get the result
         service = SwapiService()
-        result = service.get_movies(page=request.query_params.get('page', 1))
+        result = service.get_movies(
+            page=request.query_params.get('page', 1), search=request.query_params.get('search'))
 
         # Call the serializer and return the response
         serializer = self.get_serializer(result)
