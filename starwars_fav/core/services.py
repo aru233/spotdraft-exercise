@@ -1,5 +1,6 @@
 """Define the services used by the starwars fav core app"""
 import requests
+from rest_framework.exceptions import NotFound
 
 
 class SwapiService:
@@ -15,7 +16,9 @@ class SwapiService:
         else:
             response = requests.post(self.BASE_URL + uri, params=params, json=post_json)
 
-        response.raise_for_status()
+        if response.status_code == 404:
+            raise NotFound()
+
         return response.json()
 
     def get_planets(self, page=1, search=None):

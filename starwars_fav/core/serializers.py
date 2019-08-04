@@ -25,8 +25,7 @@ class PaginatedSerializer(serializers.Serializer):
         """Replace the SWAPI URL with our URL."""
         previous_url = None
         if obj['previous']:
-            previous_url = self.context['request'].build_absolute_uri(
-                reverse(reverse(self.route_name)))
+            previous_url = self.context['request'].build_absolute_uri(reverse(self.route_name))
             previous_url = f'{previous_url}?{obj["previous"].split("?")[-1]}'
         return previous_url
 

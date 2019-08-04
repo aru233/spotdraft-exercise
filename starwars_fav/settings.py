@@ -125,3 +125,5 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
+
+SILENCED_SYSTEM_CHECKS = ['rest_framework.W001']
